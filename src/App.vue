@@ -17,8 +17,12 @@
 
       <div class="splitScreen">
         <div class="wrapper">
-          <div class="leftSide">Мобильные приложения</div>
-          <div class="rightSide">Сайты</div>
+          <div class="leftSide sliding" id="mobileApp">
+            <h1>Мобильные приложения</h1>
+          </div>
+          <div class="rightSide sliding" id="website">
+            <h1>Сайты</h1>
+          </div>
         </div>
       </div>
 
@@ -101,6 +105,7 @@ export default {
       'Связаться с нами',
     ],
   }),
+
 
   methods: {
     // Dropdown Menu
@@ -225,6 +230,44 @@ export default {
   }
 
   // Split Containers
+
+  .wrapper{
+    display: flex;
+    height: 800px;
+  }
+
+  .sliding{
+    height: 100%;
+    flex-basis: 50%;
+    flex-shrink: 1;
+    transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sliding h1{
+    color: white;
+  }
+
+  .sliding:hover{
+    flex-basis: 100%;
+  }
+
+  #mobileApp{
+    background-image: url("https://dmarket.com/blog/best-dota2-wallpapers/dota-2-wallpaper-hd_1985214_hu494b799959637414e43eef86d7a8e35c_331814_1920x1080_resize_q75_lanczos.jpg");
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  #website{
+    background-image: url("https://wallpaperaccess.com/full/1409299.jpg");
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
   .wrapper .leftSide,
   .wrapper .rightSide {
     width: 100%;
@@ -239,7 +282,7 @@ export default {
 
     .wrapper .leftSide,
     .wrapper .rightSide {
-      width: 50%;
+      width: 100%;
       height: 800px;
     }
   }
