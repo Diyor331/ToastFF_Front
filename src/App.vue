@@ -15,19 +15,12 @@
       </div>
       <!--End of Nav Bar-->
 
-      <div class="splitScreen">
-        <div class="wrapper">
-          <div class="leftSide sliding" id="mobileApp">
-            <h1>Мобильные приложения</h1>
-          </div>
-          <div class="rightSide sliding" id="website">
-            <h1>Сайты</h1>
-          </div>
-        </div>
-      </div>
 
-      <div class="huyna">
-        <h1>EBAL V ROT</h1>
+
+      <div class="content">
+        <transition name="component-fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
 
 
@@ -39,15 +32,17 @@
         <v-app-bar flat class="appBar">
           <v-toolbar-title class="logo-text white--text">ToastFF</v-toolbar-title>
           <v-spacer></v-spacer>
-          <div class="nav">
-            <v-card-title class="item-card"><a v-on:click="openSection(1)">Что мы умеем?</a></v-card-title>
-            <v-card-title class="item-card"><a v-on:click="openSection(2)">Портфолио</a></v-card-title>
-            <v-card-title class="item-card"><a v-on:click="openSection(3)">Сотрудники</a></v-card-title>
-            <button v-on:click="closeMenu" class="dropdownIcon">
-              <div class="firstLine"></div>
-              <div class="secondLine"></div>
-            </button>
+          <div class="nav" v-for="navItem in navItems" :key="navItem">
+            <v-card-title class="item-card">
+              <a v-on:click="openSection(navItem.id)">
+                {{ navItem.name }}
+              </a>
+            </v-card-title>
           </div>
+          <button v-on:click="closeMenu" class="dropdownIcon">
+            <div class="firstLine"></div>
+            <div class="secondLine"></div>
+          </button>
         </v-app-bar>
       </div>
       <hr style="color: white; height: 1.4px">
@@ -104,6 +99,20 @@ export default {
       'Что мы умеем?',
       'Связаться с нами',
     ],
+    navItems: [
+      {
+        'id': 1,
+        'name': 'Что мы умеем?'
+      },
+      {
+        'id': 2,
+        'name': 'Портфолио'
+      },
+      {
+        'id': 3,
+        'name': 'Сотрудники'
+      },
+    ]
   }),
 
 
@@ -231,10 +240,7 @@ export default {
 
   // Split Containers
 
-  .wrapper{
-    display: flex;
-    height: 800px;
-  }
+
 
   .sliding{
     height: 100%;
@@ -268,32 +274,6 @@ export default {
     background-attachment: fixed;
   }
 
-  .wrapper .leftSide,
-  .wrapper .rightSide {
-    width: 100%;
-    height: 800px;
-  }
 
-  @media screen and (min-width: 1200px) {
-    .wrapper {
-      display: flex;
-      height: 800px;
-    }
-
-    .wrapper .leftSide,
-    .wrapper .rightSide {
-      width: 100%;
-      height: 800px;
-    }
-  }
-
-
-  .wrapper .leftSide {
-    background: red;
-  }
-
-  .wrapper .rightSide {
-    background: blue;
-  }
 }
 </style>
