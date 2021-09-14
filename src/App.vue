@@ -1,20 +1,19 @@
 <template>
   <v-app app dark>
-    <div class="mainContainer">
+    <v-container>
       <!--Nav Bar-->
-      <div class="container">
-        <v-app-bar flat class="appBar">
-          <v-toolbar-title class="logo-text white--text">ToastFF</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn class="ma-5" outlined color="white">Связаться с нами</v-btn>
-          <button v-on:click="openMenu" class="dropdownIcon">
-            <div class="firstLine"></div>
-            <div class="secondLine"></div>
-          </button>
-        </v-app-bar>
-      </div>
-      <!--End of Nav Bar-->
+      <v-app-bar flat class="appBar">
+        <v-toolbar-title class="logo-text white--text">ToastFF</v-toolbar-title>
+        <v-spacer></v-spacer>
 
+        <v-row>
+          <v-col  cols="4" v-for="link in links" :key="link" >
+            <v-btn link text rounded class="white--text" :to="link.path" >{{link.title}}</v-btn>
+          </v-col>
+        </v-row>
+
+      </v-app-bar>
+      <!--End of Nav Bar-->
 
 
       <div class="content">
@@ -23,67 +22,35 @@
         </transition>
       </div>
 
-
-    </div>
-
-    <!--DropDown Menu-->
-    <div id="hamburgerMenu" class="dropdownMenu">
-      <div class="container">
-        <v-app-bar flat class="appBar">
-          <v-toolbar-title class="logo-text white--text">ToastFF</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <div class="nav" v-for="navItem in navItems" :key="navItem">
-            <v-card-title class="item-card">
-              <a v-on:click="openSection(navItem.id)">
-                {{ navItem.name }}
-              </a>
-            </v-card-title>
+      <!--Footer-->
+      <v-footer color="#1C2020" fixed>
+        <div class="row justify-center ma-0 footerItem">
+          <div class="col-md-3 ">
+            <a href="#">ToastFF</a>
           </div>
-          <button v-on:click="closeMenu" class="dropdownIcon">
-            <div class="firstLine"></div>
-            <div class="secondLine"></div>
-          </button>
-        </v-app-bar>
-      </div>
-      <hr style="color: white; height: 1.4px">
-
-      <!--Skill Section-->
-      <div id="skills" class="skillSection">
-        <div>
-          <h1>SKILLS</h1>
+          <div class="col-md-3 ">
+            <a href="#">+99871 200 00 22</a>
+          </div>
+          <div class="col-md-3 ">
+            <a href="#">info@toast.ff</a>
+          </div>
+          <div class="col-md-2 align-items-center footerSocial">
+            <v-btn icon>
+              <v-icon>mdi-facebook</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon class="icon">mdi-instagram</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon class="icon">mdi-whatsapp</v-icon>
+            </v-btn>
+          </div>
         </div>
-      </div>
-
-      <!--Portfolio Section-->
-      <div id="portfolio" class="portfolioSection">
-        <div>
-          <h1>PORTFOLIO</h1>
-        </div>
-      </div>
-
-      <!--Mates Section-->
-      <div id="mates" class="matesSection">
-        <div>
-          <h1>MATES</h1>
-        </div>
-      </div>
-    </div>
-
-
-    <v-footer color="#1C2020" padless>
-      <v-row justify="center" no-gutters>
-        <v-col class="text-center">
-          <v-btn v-for="link in links" :key="link" color="white" text rounded class="my-2">
-            {{ link }}
-          </v-btn>
-        </v-col>
-
-        <v-col class="#1C2020 py-1 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} — <strong>ToastFF</strong>
-        </v-col>
-      </v-row>
-    </v-footer>
+      </v-footer>
+      <!--End Footer-->
+    </v-container>
   </v-app>
+
 </template>
 
 <script>
@@ -92,73 +59,33 @@ export default {
   name: 'App',
   data: () => ({
     links: [
-      'Главная',
-      'О нас',
-      'Портфолио',
-      'Сотрудники',
-      'Что мы умеем?',
-      'Связаться с нами',
-    ],
-    navItems: [
       {
-        'id': 1,
-        'name': 'Что мы умеем?'
+        title: 'Главная',
+        path: '/'
       },
       {
-        'id': 2,
-        'name': 'Портфолио'
+        title: 'Заказать проект',
+        path: '/createproject'
       },
       {
-        'id': 3,
-        'name': 'Сотрудники'
+        title: 'Контакты',
+        path: '/contacts'
       },
     ]
   }),
 
 
   methods: {
-    // Dropdown Menu
-    openMenu() {
-      document.getElementById("hamburgerMenu").style.height = "100vh"
-    },
-    closeMenu() {
-      document.getElementById("hamburgerMenu").style.height = "0%"
-    },
-    // Dropdown Sections
-    openSection(btn) {
-      let skillSection = document.getElementById("skills");
-      let portfolioSection = document.getElementById("portfolio");
-      let matesSection = document.getElementById("mates");
-      if (btn === 1) {
-        skillSection.style.display = "block";
-        portfolioSection.style.display = "none";
-        matesSection.style.display = "none";
-      } else if (btn === 2) {
-        skillSection.style.display = "none";
-        portfolioSection.style.display = "block";
-        matesSection.style.display = "none";
-      } else if (btn === 3) {
-        skillSection.style.display = "none";
-        portfolioSection.style.display = "none";
-        matesSection.style.display = "block";
-      }
-    },
+
   }
 }
 </script>
 
 <style lang="scss">
-
 #app {
   width: 100%;
   background: #1C1F20;
-
-  .huyna {
-    width: 100%;
-    height: 500px;
-    background: white;
-  }
-
+  font-family: 'Montserrat', sans-serif;
   // Global
   hr {
     margin: 0;
@@ -238,11 +165,7 @@ export default {
     background: bisque;
   }
 
-  // Split Containers
-
-
-
-  .sliding{
+  .sliding {
     height: 100%;
     flex-basis: 50%;
     flex-shrink: 1;
@@ -252,26 +175,50 @@ export default {
     align-items: center;
   }
 
-  .sliding h1{
+  .sliding h1 {
     color: white;
   }
 
-  .sliding:hover{
+  .sliding:hover {
     flex-basis: 100%;
   }
 
-  #mobileApp{
+  #mobileApp {
     background-image: url("https://dmarket.com/blog/best-dota2-wallpapers/dota-2-wallpaper-hd_1985214_hu494b799959637414e43eef86d7a8e35c_331814_1920x1080_resize_q75_lanczos.jpg");
     -webkit-background-size: cover;
     background-size: cover;
     background-attachment: fixed;
   }
 
-  #website{
+  #website {
     background-image: url("https://wallpaperaccess.com/full/1409299.jpg");
     -webkit-background-size: cover;
     background-size: cover;
     background-attachment: fixed;
+  }
+
+  .footerItem {
+    a {
+      text-decoration: none;
+      color: #393c3d;
+      font-size: 18px;
+      transition: .5s ease-out;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+  }
+
+  .footerSocial {
+    .v-icon {
+      color: #393c3d;
+      transition: .5s;
+    }
+
+    .v-icon:hover {
+      color: #ffffff;
+    }
   }
 
 

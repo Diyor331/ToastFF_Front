@@ -6,12 +6,16 @@ import vuetify from "./plugins/vuetify";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Particles from "particles.vue";
 import Home from "./views/Home";
+import CreateProject from "@/views/CreateProject";
+import Contacts from "@/views/Contacts";
 
 Vue.use(Router);
 Vue.prototype.$axios = axios;
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(Particles);
 
 const router = new Router({
   routes: [
@@ -19,6 +23,16 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home,
+    },
+    {
+      path: "/createproject",
+      name: "createProject",
+      component: CreateProject,
+    },
+    {
+      path: "/contacts",
+      name: "contacts",
+      component: Contacts,
     },
   ],
 });
